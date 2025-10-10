@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { useAuthStore } from './store/authStore'
 import Layout from './components/Layout'
 import LandingPage from './pages/LandingPage'
@@ -44,14 +44,19 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
   
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-white text-xl">Loading...</div>
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-blue-50">
+        <div className="text-center space-y-4">
+          <div className="animate-spin rounded-full h-12 w-12 border-4 border-green-600 border-t-transparent mx-auto"></div>
+          <p className="text-gray-600">Checking authentication...</p>
+        </div>
       </div>
     )
   }
   
   if (!user) {
-    return <Navigate to="/" replace />
+    // Force redirect to home page
+    window.location.replace('/')
+    return null
   }
   
   return <>{children}</>
