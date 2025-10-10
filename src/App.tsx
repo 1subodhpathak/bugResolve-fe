@@ -4,6 +4,7 @@ import { useAuthStore } from './store/authStore'
 import Layout from './components/Layout'
 import LandingPage from './pages/LandingPage'
 import Auth from './pages/Auth'
+import AuthCallback from './pages/AuthCallback'
 import Dashboard from './pages/Dashboard'
 import Repositories from './pages/Repositories'
 import Issues from './pages/Issues'
@@ -26,6 +27,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/auth" element={<Auth />} />
+        <Route path="/auth/callback" element={<AuthCallback />} />
         <Route path="/dashboard" element={<ProtectedRoute><Layout><Dashboard /></Layout></ProtectedRoute>} />
         <Route path="/repositories" element={<ProtectedRoute><Layout><Repositories /></Layout></ProtectedRoute>} />
         <Route path="/issues" element={<ProtectedRoute><Layout><Issues /></Layout></ProtectedRoute>} />

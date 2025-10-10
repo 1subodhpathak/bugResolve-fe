@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
 import { AlertCircle, Sparkles, ExternalLink, RefreshCw, CheckCircle2, XCircle, Loader as LoaderIcon } from 'lucide-react'
 import Loader from '../components/Loader'
+import { authenticatedGet } from '../utils/api'
 
 type TabType = 'all' | 'open' | 'closed'
 
@@ -13,7 +13,7 @@ export default function Issues() {
   const { data, isLoading, refetch, isFetching } = useQuery({
     queryKey: ['issues'],
     queryFn: async () => {
-      const res = await axios.get('/api/issues', { withCredentials: true })
+      const res = await authenticatedGet('/api/issues')
       return res.data
     }
   })

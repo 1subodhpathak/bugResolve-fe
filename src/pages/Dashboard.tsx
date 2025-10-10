@@ -1,14 +1,14 @@
 import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
 import { AlertCircle, GitPullRequest, CheckCircle, TrendingUp, ArrowRight, Zap, GitFork } from 'lucide-react'
 import Loader from '../components/Loader'
+import { authenticatedGet } from '../utils/api'
 
 export default function Dashboard() {
   const { data: issues, isLoading: issuesLoading, error: issuesError } = useQuery({
     queryKey: ['issues'],
     queryFn: async () => {
-      const res = await axios.get('/api/issues', { withCredentials: true })
+      const res = await authenticatedGet('/api/issues')
       return res.data.issues
     },
     staleTime: 5 * 60 * 1000, // 5 minutes
@@ -19,7 +19,7 @@ export default function Dashboard() {
   const { data: prs, isLoading: prsLoading, error: prsError } = useQuery({
     queryKey: ['prs'],
     queryFn: async () => {
-      const res = await axios.get('/api/prs', { withCredentials: true })
+      const res = await authenticatedGet('/api/prs')
       return res.data.pullRequests
     },
     staleTime: 5 * 60 * 1000, // 5 minutes
@@ -30,7 +30,7 @@ export default function Dashboard() {
   const { data: validations, isLoading: validationsLoading, error: validationsError } = useQuery({
     queryKey: ['validations'],
     queryFn: async () => {
-      const res = await axios.get('/api/validations/pending', { withCredentials: true })
+      const res = await authenticatedGet('/api/validations/pending')
       return res.data.solutions
     },
     staleTime: 5 * 60 * 1000, // 5 minutes
