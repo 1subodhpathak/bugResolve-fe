@@ -54,18 +54,9 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
   }
   
   if (!user) {
-    console.log('🚫 No user found, redirecting to home')
-    // Use a more gentle redirect
-    setTimeout(() => {
-      window.location.href = '/'
-    }, 100)
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <p className="text-gray-600">Redirecting to login...</p>
-        </div>
-      </div>
-    )
+    // Force redirect to home page
+    window.location.replace('/')
+    return null
   }
   
   return <>{children}</>

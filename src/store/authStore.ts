@@ -22,15 +22,10 @@ export const useAuthStore = create<AuthState>((set) => ({
   checkAuth: async () => {
     try {
       const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000'
-      console.log('🔍 Checking auth with API URL:', apiUrl)
-      const response = await axios.get(`${apiUrl}/api/auth/me`, { 
-        withCredentials: true,
-        timeout: 10000 // 10 second timeout
-      })
-      console.log('✅ Auth check successful:', response.data)
+      const response = await axios.get(`${apiUrl}/api/auth/me`, { withCredentials: true })
       set({ user: response.data, isLoading: false })
     } catch (error) {
-      console.log('❌ Auth check failed:', error)
+      console.log('Auth check failed:', error)
       set({ user: null, isLoading: false })
     }
   },
