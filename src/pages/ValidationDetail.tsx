@@ -8,6 +8,7 @@ import RiskIndicator from '../components/RiskIndicator'
 import ChangeStats from '../components/ChangeStats'
 import DiffViewer from '../components/DiffViewer'
 import Loader from '../components/Loader'
+import { authenticatedGet } from '../utils/api'
 
 export default function ValidationDetail() {
   const { solutionId } = useParams()
@@ -22,7 +23,7 @@ export default function ValidationDetail() {
     queryKey: ['solution', solutionId],
     queryFn: async () => {
       // For now, we'll get it from validations
-      const res = await axios.get('/api/validations/pending', { withCredentials: true })
+      const res = await authenticatedGet('/api/validations/pending')
       const sol = res.data.solutions.find((s: any) => s._id === solutionId)
       return sol
     }

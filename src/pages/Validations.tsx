@@ -4,6 +4,7 @@ import axios from 'axios'
 import toast from 'react-hot-toast'
 import { CheckCircle, FileCode, AlertTriangle, Trash2 } from 'lucide-react'
 import Loader from '../components/Loader'
+import { authenticatedGet } from '../utils/api'
 
 export default function Validations() {
   const queryClient = useQueryClient()
@@ -11,14 +12,18 @@ export default function Validations() {
   const { data, isLoading } = useQuery({
     queryKey: ['validations'],
     queryFn: async () => {
-      const res = await axios.get('/api/validations/pending', { withCredentials: true })
+      const res = await authenticatedGet('/api/validations/pending')
       return res.data
     }
   })
 
   const deleteMutation = useMutation({
     mutationFn: async (solutionId: string) => {
-      await axios.delete(`/api/validations/${solutionId}`, { withCredentials: true })
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000'
+      const token = localStorage.getItem('auth_token')
+      await axios.delete(`${apiUrl}/api/validations/${solutionId}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      })
     },
     onSuccess: () => {
       toast.success('Solution deleted successfully')

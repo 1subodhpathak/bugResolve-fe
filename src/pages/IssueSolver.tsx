@@ -7,6 +7,7 @@ import { Sparkles, Code, FileCode, AlertCircle, Loader as LoaderIcon } from 'luc
 import ProgressTracker, { AI_ANALYSIS_STEPS } from '../components/ProgressTracker'
 import DiffViewer from '../components/DiffViewer'
 import Loader from '../components/Loader'
+import { authenticatedGet } from '../utils/api'
 
 export default function IssueSolver() {
   const { issueId } = useParams()
@@ -19,7 +20,7 @@ export default function IssueSolver() {
   const { data: issueData, isLoading: issueLoading } = useQuery({
     queryKey: ['issue', issueId],
     queryFn: async () => {
-      const res = await axios.get(`/api/issues/${issueId}`, { withCredentials: true })
+      const res = await authenticatedGet(`/api/issues/${issueId}`)
       return res.data.issue
     }
   })
@@ -28,7 +29,7 @@ export default function IssueSolver() {
   const { data: modelsData } = useQuery({
     queryKey: ['ai-models'],
     queryFn: async () => {
-      const res = await axios.get('/api/ai/models', { withCredentials: true })
+      const res = await authenticatedGet('/api/ai/models')
       return res.data
     }
   })
@@ -42,10 +43,15 @@ export default function IssueSolver() {
       setTimeout(() => setAnalysisStep(2), 3000);   // Context gathering
       setTimeout(() => setAnalysisStep(3), 6000);   // Solution generation
       
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000'
       const res = await axios.post(
-        '/api/ai/generate-solution',
+        `${apiUrl}/api/ai/generate-solution`,
         { issueId, modelId: selectedModel },
-        { withCredentials: true }
+        {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('auth_token')}`
+          }
+        }
       )
       
       setAnalysisStep(4); // Complete

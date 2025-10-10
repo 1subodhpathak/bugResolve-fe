@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import axios from 'axios'
 import { GitPullRequest, ExternalLink, RefreshCw, CheckCircle, GitMerge, XCircle } from 'lucide-react'
 import Loader from '../components/Loader'
+import { authenticatedGet } from '../utils/api'
 
 type TabType = 'all' | 'open' | 'closed'
 
@@ -12,7 +12,7 @@ export default function PullRequests() {
   const { data, isLoading, refetch, isFetching } = useQuery({
     queryKey: ['pull-requests'],
     queryFn: async () => {
-      const res = await axios.get('/api/prs', { withCredentials: true })
+      const res = await authenticatedGet('/api/prs')
       return res.data
     }
   })

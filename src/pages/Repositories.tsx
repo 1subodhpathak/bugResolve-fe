@@ -4,6 +4,7 @@ import toast from 'react-hot-toast'
 import { GitBranch, RefreshCw, ExternalLink } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import Loader from '../components/Loader'
+import { authenticatedGet } from '../utils/api'
 
 export default function Repositories() {
   const queryClient = useQueryClient()
@@ -12,7 +13,7 @@ export default function Repositories() {
   const { data, isLoading, refetch } = useQuery({
     queryKey: ['repositories'],
     queryFn: async () => {
-      const res = await axios.get('/api/github/repositories', { withCredentials: true })
+      const res = await authenticatedGet('/api/github/repositories')
       return res.data
     }
   })
