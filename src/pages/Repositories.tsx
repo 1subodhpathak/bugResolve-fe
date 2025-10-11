@@ -1,10 +1,10 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import axios from 'axios'
+// import axios from 'axios'
 import toast from 'react-hot-toast'
 import { GitBranch, RefreshCw, ExternalLink } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import Loader from '../components/Loader'
-import { authenticatedGet } from '../utils/api'
+import { authenticatedGet, authenticatedPost } from '../utils/api'
 
 export default function Repositories() {
   const queryClient = useQueryClient()
@@ -20,11 +20,7 @@ export default function Repositories() {
 
   const syncMutation = useMutation({
     mutationFn: async ({ owner, repo }: { owner: string; repo: string }) => {
-      const res = await axios.post(
-        `/api/github/repositories/${owner}/${repo}/sync`,
-        {},
-        { withCredentials: true }
-      )
+      const res = await authenticatedPost(`/api/github/repositories/${owner}/${repo}/sync`)
       return res.data
     },
     onSuccess: () => {
@@ -40,10 +36,7 @@ export default function Repositories() {
 
   const fetchIssuesMutation = useMutation({
     mutationFn: async ({ owner, repo }: { owner: string; repo: string }) => {
-      const res = await axios.get(
-        `/api/github/repositories/${owner}/${repo}/issues`,
-        { withCredentials: true }
-      )
+      const res = await authenticatedGet(`/api/github/repositories/${owner}/${repo}/issues`)
       return res.data
     },
     onSuccess: (data) => {
