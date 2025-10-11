@@ -140,7 +140,7 @@ export default function Auth() {
       {/* Footer */}
       <footer className="container-custom py-6 border-t border-gray-200">
         <div className="text-center text-gray-500 text-sm">
-          © 2024 Bug Resolve. Made with ❤️ for developers.
+          © 2025 Bug Resolve. Made with ❤️ for developers.
         </div>
       </footer>
     </div>

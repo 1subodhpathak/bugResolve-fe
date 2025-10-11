@@ -203,7 +203,7 @@ export default function Layout({ children }: LayoutProps) {
           {/* Footer */}
           <footer className="max-w-[1400px] mx-auto px-6 py-6 mt-12">
             <div className="text-center text-gray-400 text-xs">
-              © 2024 Bug Resolve • Made with ❤️ for developers
+              © 2025 Bug Resolve • Made with ❤️ for developers
             </div>
           </footer>
         </main>
