@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import axios from 'axios'
+// import axios from 'axios'
+import { authenticatedPost } from '../utils/api'
 import toast from 'react-hot-toast'
 import { CheckCircle, XCircle, Edit, FileCode, AlertCircle, AlertTriangle, Lightbulb, CheckSquare, Shield } from 'lucide-react'
 import RiskIndicator from '../components/RiskIndicator'
@@ -32,11 +33,7 @@ export default function ValidationDetail() {
   // Validate mutation
   const validateMutation = useMutation({
     mutationFn: async (status: string) => {
-      const res = await axios.post(
-        `/api/validations/${solutionId}/validate`,
-        { status, comments },
-        { withCredentials: true }
-      )
+      const res = await authenticatedPost(`/api/validations/${solutionId}/validate`, { status, comments })
       return res.data
     },
     onSuccess: (data) => {
@@ -73,11 +70,7 @@ export default function ValidationDetail() {
   // Modify mutation
   const modifyMutation = useMutation({
     mutationFn: async (modifications: any[]) => {
-      const res = await axios.post(
-        `/api/validations/${solutionId}/modify`,
-        { modifications, comments },
-        { withCredentials: true }
-      )
+      const res = await authenticatedPost(`/api/validations/${solutionId}/modify`, { modifications, comments })
       return res.data
     },
     onSuccess: () => {
