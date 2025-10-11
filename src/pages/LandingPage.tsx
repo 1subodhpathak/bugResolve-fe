@@ -423,7 +423,7 @@ export default function LandingPage() {
           </div>
 
           <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400 text-sm">
-            © 2024 Bug Resolve. All rights reserved. Made with ❤️ for developers.
+            © 2025 Bug Resolve. All rights reserved. Made with ❤️ for developers.
           </div>
         </div>
       </footer>
