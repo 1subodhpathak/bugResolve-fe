@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useMutation } from '@tanstack/react-query'
-import axios from 'axios'
+// import axios from 'axios'
+import { authenticatedPost } from '../utils/api'
 import toast from 'react-hot-toast'
 import { ExternalLink, GitFork, AlertCircle, CheckCircle2, Loader as LoaderIcon, Sparkles } from 'lucide-react'
 import Loader from '../components/Loader'
@@ -35,11 +36,7 @@ export default function Contribute() {
   // Parse URL mutation
   const parseMutation = useMutation({
     mutationFn: async (url: string) => {
-      const res = await axios.post(
-        '/api/contributions/parse-url',
-        { url },
-        { withCredentials: true }
-      )
+      const res = await authenticatedPost('/api/contributions/parse-url', { url })
       return res.data
     },
     onSuccess: async (data) => {
@@ -59,15 +56,11 @@ export default function Contribute() {
   // Fetch issue details mutation
   const fetchIssueMutation = useMutation({
     mutationFn: async (parsed: ParsedUrl) => {
-      const res = await axios.post(
-        '/api/contributions/fetch-issue',
-        {
-          owner: parsed.owner,
-          repo: parsed.repo,
-          issueNumber: parsed.issueNumber
-        },
-        { withCredentials: true }
-      )
+      const res = await authenticatedPost('/api/contributions/fetch-issue', {
+        owner: parsed.owner,
+        repo: parsed.repo,
+        issueNumber: parsed.issueNumber
+      })
       return res.data
     },
     onSuccess: (data) => {
@@ -90,15 +83,11 @@ export default function Contribute() {
       
       setStep('importing')
       
-      const res = await axios.post(
-        '/api/contributions/import-issue',
-        {
-          owner: parsed.owner,
-          repo: parsed.repo,
-          issueNumber: parsed.issueNumber
-        },
-        { withCredentials: true }
-      )
+      const res = await authenticatedPost('/api/contributions/import-issue', {
+        owner: parsed.owner,
+        repo: parsed.repo,
+        issueNumber: parsed.issueNumber
+      })
       return res.data
     },
     onSuccess: (data) => {
