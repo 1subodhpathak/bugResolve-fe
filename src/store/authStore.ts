@@ -6,6 +6,7 @@ interface User {
   username: string
   email: string
   avatarUrl: string
+  plan: string
 }
 
 interface AuthState {
@@ -15,6 +16,7 @@ interface AuthState {
   checkAuth: () => Promise<void>
   setToken: (token: string) => void
   logout: () => Promise<void>
+  setPlan: (plan: string) => void
 }
 
 // Helper function to get token from localStorage
@@ -49,6 +51,10 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   setToken: (token: string) => {
     storeToken(token)
     set({ token })
+  },
+  
+  setPlan: (plan: string) => {
+    set({ user: { ...get().user, plan } })
   },
   
   checkAuth: async () => {
