@@ -82,3 +82,19 @@ export const authenticatedDelete = async (endpoint: string) => {
   
   return response
 }
+
+// New API calls for pricing tiers
+export const getPricingTiers = async () => {
+  const response = await authenticatedGet('/api/pricing/tiers')
+  return response.data
+}
+
+export const getPlanDetails = async (planId: string) => {
+  const response = await authenticatedGet(`/api/pricing/plans/${planId}`)
+  return response.data
+}
+
+export const subscribeToPlan = async (planId: string) => {
+  const response = await authenticatedPost('/api/pricing/subscribe', { planId })
+  return response.data
+}
