@@ -70,6 +70,9 @@ export default function LandingPage() {
                 <a href="#benefits" className="text-gray-600 hover:text-gray-900 font-medium transition-colors">
                   Benefits
                 </a>
+                <a href="#pricing" className="text-gray-600 hover:text-gray-900 font-medium transition-colors">
+                  Pricing
+                </a>
               </div>
             {/* </div> */}
             {/* Logo */}
@@ -430,6 +433,85 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* Pricing Section */}
+      <section id="pricing" className="section section-alt">
+        <div className="container-custom">
+          <div className="text-center mb-16 space-y-4">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
+              Pricing Plans
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Choose the plan that's right for you
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Free Plan */}
+            <div className="card-pricing bg-white border border-gray-100 rounded-2xl shadow-sm">
+              <div className="text-center py-8">
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Free</h3>
+                <p className="text-4xl font-bold text-gray-900 mb-4">$0</p>
+                <p className="text-gray-600">Perfect for small projects and individuals</p>
+              </div>
+              <div className="border-t border-gray-100 py-6">
+                <ul className="space-y-2 text-gray-600 text-sm">
+                  <li>1 user</li>
+                  <li>1 repository</li>
+                  <li>100 issues/month</li>
+                </ul>
+              </div>
+              <div className="text-center py-6">
+                <Link to="/auth" className="btn btn-primary w-full text-lg py-4">
+                  Get Started
+                </Link>
+              </div>
+            </div>
+
+            {/* Pro Plan */}
+            <div className="card-pricing bg-white border border-gray-100 rounded-2xl shadow-sm">
+              <div className="text-center py-8">
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Pro</h3>
+                <p className="text-4xl font-bold text-gray-900 mb-4">$29</p>
+                <p className="text-gray-600">Ideal for growing teams and projects</p>
+              </div>
+              <div className="border-t border-gray-100 py-6">
+                <ul className="space-y-2 text-gray-600 text-sm">
+                  <li>5 users</li>
+                  <li>5 repositories</li>
+                  <li>500 issues/month</li>
+                </ul>
+              </div>
+              <div className="text-center py-6">
+                <Link to="/auth" className="btn btn-primary w-full text-lg py-4">
+                  Upgrade to Pro
+                </Link>
+              </div>
+            </div>
+
+            {/* Enterprise Plan */}
+            <div className="card-pricing bg-white border border-gray-100 rounded-2xl shadow-sm">
+              <div className="text-center py-8">
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Enterprise</h3>
+                <p className="text-4xl font-bold text-gray-900 mb-4">Custom</p>
+                <p className="text-gray-600">For large teams and organizations</p>
+              </div>
+              <div className="border-t border-gray-100 py-6">
+                <ul className="space-y-2 text-gray-600 text-sm">
+                  <li>Unlimited users</li>
+                  <li>Unlimited repositories</li>
+                  <li>Unlimited issues/month</li>
+                </ul>
+              </div>
+              <div className="text-center py-6">
+                <Link to="/auth" className="btn btn-primary w-full text-lg py-4">
+                  Contact Us
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="section bg-gradient-to-br from-green-600 to-blue-600 text-white">
         <div className="container-custom text-center space-y-8">
@@ -473,6 +555,7 @@ export default function LandingPage() {
                 <li><a href="#features" className="hover:text-white transition-colors">Features</a></li>
                 <li><a href="#how-it-works" className="hover:text-white transition-colors">How It Works</a></li>
                 <li><a href="#benefits" className="hover:text-white transition-colors">Benefits</a></li>
+                <li><a href="#pricing" className="hover:text-white transition-colors">Pricing</a></li>
               </ul>
             </div>
 
@@ -498,7 +581,7 @@ export default function LandingPage() {
           </div>
 
           <div className=" mt-12 pt-8 text-center text-gray-800 text-sm">
-            © 2025 Iterra AI
+            &copy; 2025 Iterra AI
           </div>
         </div>
       </footer>
